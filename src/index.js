@@ -4,32 +4,59 @@ document.addEventListener("DOMContentLoaded", () => {
 let form = document.querySelector("form")
 form.addEventListener("submit", (e)=>{
   e.preventDefault()
-buildDescriptionToDo(e.target.querySelector('#new-task-description').value)
+  //debugger
+buildDescriptionToDo(e.target.querySelector('#new-task-description').value, e.target["color"].value)
 form.reset()
 //createLabelTag()
 })
 })
 
 
-  function buildDescriptionToDo(toDo){
+  function buildDescriptionToDo(toDo, color){
     let li= document.createElement('li')
     let btn = document.createElement('button')
+    let edit = document.createElement('button')
     btn.addEventListener('click', handleDeleteTask)
+    edit.addEventListener('click', handleEdit)
     btn.textContent = ' x'
+    edit.textContent = ' edit'
     li.textContent = `${toDo}`
     li.appendChild(btn)
+    li.appendChild(edit)
     document.querySelector("#tasks").appendChild(li)
-    // li.setAttribute('style', 'color')
-    // if(li === High){
-    //   li.setAttribute('style', 'red')
-    // }
+    li.setAttribute('style', `color:${color};`)
+
     console.log(toDo)
   };
 
+  function handleEdit(e){
+/*roadMap
+1- grab the li text using documentquerySe...
+2- add text from li to the input field
+3- remove the current li
+*/
+  console.log(e.target.parentNode.remove())
+
+}
 
   function handleDeleteTask(e){
     e.target.parentNode.remove();
   }
+
+
+
+  const colorSelection = document.querySelector("#color");
+  console.log(colorSelection);
+  colorSelection.addEventListener("change", colorSetting)
+
+
+  function colorSetting(e){
+    console.log("we are red, yellow and green")
+    console.log(e)
+  }
+
+
+
 
 /*
 function createLabelTag(){
